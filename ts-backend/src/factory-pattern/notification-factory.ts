@@ -4,9 +4,9 @@ import {
   EmailNotification,
   SMSNotification,
   PushNotification,
-} from "./Notifications";
+} from "./notifications";
 
-class NotificationFactory {
+export class NotificationFactory {
   static createNotification(type: NotificationType): Notification {
     switch (type) {
       case "email":
