@@ -4,6 +4,8 @@ import { EmailObserver } from "../observer-pattern/email-observer";
 import { InventoryObserver } from "../observer-pattern/inventory-observer";
 import { AnalyticsObserver } from "../observer-pattern/analytics-observer";
 import { CardPayment, Checkout, UpiPayment } from "../strategy-pattern/payment-strategy";
+import { CaramelDecorator, MilkDecorator, SugarDecorator } from "../decorator-pattern/coffee-decorator";
+import { BaseCoffee } from "../decorator-pattern/coffee-interface";
 
 const router = Router();
 
@@ -33,5 +35,13 @@ router.get("/strategy" , (req : Request , res : Response) => {
     checkout.placeOrder(100);
     res.send("Check the Back end Logs !");
 })
+
+router.get("/decorator" , (req : Request , res : Response) => {
+    const order = new CaramelDecorator(new SugarDecorator( new MilkDecorator( new BaseCoffee())))
+    console.log(order.cost());
+    console.log(order.description());
+    res.send("Check the Back end Logs !");
+})
+
 
 export default router;
