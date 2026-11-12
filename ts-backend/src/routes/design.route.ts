@@ -19,6 +19,7 @@ import {
   ConsoleLogger,
   FileLogger,
 } from "../chain-of-responsibilty-pattern/loggers";
+import { ReportProxy } from "../proxy pattern/report";
 
 const router = Router();
 
@@ -68,6 +69,27 @@ router.get("/cor", (req: Request, res: Response) => {
   consoleLogger.log({ level: 2, text: "medium message" });
   consoleLogger.log({ level: 3, text: "critical message" });
   res.send("Check the Back end Logs !");
-  
+
 });
+
+router.get("/proxy" , (req : Request , res : Response) =>{
+  const user1 = {
+    name : 'user 1',
+    role : 1 
+  }
+
+  const user2 = {
+    name : 'user 2' ,
+    role : 2 
+  }
+  const report1 = new ReportProxy(user1);
+  const report2 = new ReportProxy(user2);
+
+  console.log(report1.view())
+  console.log(report2.view())
+  res.send("Check the Back end Logs !");
+
+})
+
+
 export default router;
